@@ -17,6 +17,7 @@
 \newcommand{\one}{\mathbf 1}
 \DeclareMathOperator{\diam}{diam}
 \setlength{\emergencystretch}{2.5em}
+\makeatletter\g@addto@macro\UrlBreaks{\do-}\makeatother
 
 \begin{document}
 
@@ -295,12 +296,15 @@ These entities are included in the funding declaration above.
 
 \section*{Data availability}
 No data were generated or analysed in this work. The finite checks in Lemma~\ref{lem:AB} use only the two lists printed
-there.
+there. Python scripts that verify Lemma~\ref{lem:AB} and test Theorems~\ref{thm:cutoff} and~\ref{thm:dims} in small
+cases are at
+\url{https://github.com/yspennstate/hadamard-row-deletion-rigid-facets/tree/v1.1}.
 
 \section*{Declaration of generative AI and AI-assisted technologies}
 This paper is part of a research project on AI proving problems. Codex agents (OpenAI) produced the constructions and
 proofs, and Claude agents (Anthropic) checked the proofs and the references and wrote the manuscript. The questions are
-due to Briggs, Feng and Wells~\cite{BFW}. The author directed the work and is responsible for the content of the paper
+due to Briggs, Feng and Wells~\cite{BFW}; the upper bound in Theorem~\ref{thm:dims} is a theorem of Bukh and
+Saatashvili~\cite{BS}, and the switching in Section~\ref{sec:switch} is of the kind studied by Orrick~\cite{Orr}. The author directed the work and is responsible for the content of the paper
 and for decisions concerning its dissemination.
 
 \begin{thebibliography}{9}
@@ -309,7 +313,8 @@ Exp. Math. \textbf{35} (2026), no.~2, 388--396, \href{https://doi.org/10.1080/10
 \arxiv{2408.01288}. Numbered results are cited as in arXiv version~2.
 \bibitem{BS} B.~Bukh and A.~Saatashvili, \emph{Maximal sets of a given diameter in Hamming cubes}, preprint, 2025,
 \arxiv{2507.10828}.
-\bibitem{Orr} W.~P.~Orrick, \emph{Switching operations for Hadamard matrices}, preprint, 2005, \arxiv{math/0507515}.
+\bibitem{Orr} W.~P.~Orrick, \emph{Switching operations for Hadamard matrices}, SIAM J. Discrete Math. \textbf{22}
+(2008), no.~1, 31--50, \href{https://doi.org/10.1137/050641727}{doi:10.1137/050641727}; \arxiv{math/0507515}.
 \bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
 \url{https://github.com/yspennstate/math-brain-public/tree/5427734deee9be643d6dfbdd5e7d4baeeefe4a4a}.
 \bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical
