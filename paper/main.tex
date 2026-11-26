@@ -1,0 +1,321 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{conjecture*}{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\arxiv}[1]{\href{https://arxiv.org/abs/#1}{arXiv:\nolinkurl{#1}}}
+\newcommand{\VR}{\mathcal{VR}}
+\newcommand{\F}{\mathbb{F}_2}
+\newcommand{\one}{\mathbf 1}
+\DeclareMathOperator{\diam}{diam}
+\setlength{\emergencystretch}{2.5em}
+
+\begin{document}
+
+\title[Row deletion and rigid facets]{Row deletion in normalized Hadamard matrices and rigid facets of
+Vietoris--Rips complexes of hypercubes}
+\author{Yitzchak Shmalo}
+\date{26 November 2026}
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Jerusalem, Israel}
+\email{yspennstate@gmail.com}
+\subjclass[2020]{05B20, 05C69, 55N31, 94B65}
+\keywords{Hadamard matrix, Hamming cube, maximal sets of given diameter, Vietoris--Rips complex, rigid facet}
+
+\begin{abstract}
+Briggs, Feng and Wells conjectured that for every fixed $k$ the columns of a normalized Hadamard matrix of large order,
+with its first $k$ rows deleted, form a maximal set of their diameter in the Hamming cube, and they proved this for
+$k\le 1$. We prove it for $k=2$ and every order $N\ge4$. For every $k\ge 3$ the conjecture fails. At each order $2^m\ge 2^k$ a
+switched Sylvester matrix gives a counterexample, to which four new words can be adjoined without increasing the
+diameter. We also answer their question whether the number of dimensions in which the Vietoris--Rips complex
+$\VR(Q_n;r)$ has a rigid facet grows exponentially in $r$. It is at least $2^{r-6}+1$ for $r\ge 6$ and $n\ge r+2$, and
+a theorem of Bukh and Saatashvili bounds it by $(4-10^{-10})^r$ for large $r$. Finally, the smallest facet of
+$\VR(Q_n;r)$ and the smallest rigid facet have the same size once $n\ge 2^r$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $Q_n=\{\pm1\}^n$ with the Hamming distance $d$, so that $\langle x,y\rangle=n-2d(x,y)$. A set $A\subseteq Q_n$ is
+\emph{maximally diameter-$r$} if $\diam A=r$ and $\diam(A\cup\{x\})>r$ for every $x\in Q_n\setminus A$. A simplex
+$\sigma$ of the Vietoris--Rips complex $\VR(Q_n;r)$ is \emph{rigid} if $\max_{y\in\sigma}d(x,y)=r$ for every
+$x\in\sigma$. The facets of $\VR(Q_n;r)$ are the maximal subsets of $Q_n$ of diameter at most $r$. When $n>r$ every
+facet has diameter exactly $r$: a set of smaller diameter is a proper subset of $Q_n$, so one of its points has a
+neighbour outside it, and adjoining that neighbour raises no distance above $r$. Thus for $n>r$ the facets are the
+maximally diameter-$r$ sets. These notions are
+from Briggs, Feng and Wells~\cite{BFW}, whose notation we follow: $f'(n;r)$ is the number of dimensions in which
+$\VR(Q_n;r)$ has a rigid facet, and $s(n;r)$ and $s'(n;r)$ are the sizes of a smallest facet and of a smallest rigid
+facet. Rigidity is what makes a facet survive in higher dimensions: by~\cite[Corollary~6]{BFW}, $X$ is a rigid facet of
+$\VR(Q_n;r)$ if and only if $X\times\{q\}$ is a rigid facet of $\VR(Q_{n+m};r)$ for every $m\ge1$ and $q\in Q_m$.
+
+A Hadamard matrix $H$ of order $N$ is \emph{normalized} if its first row and first column consist of ones. For a matrix
+$A$ let $A_{-k}$ be the matrix obtained by deleting its first $k$ rows. Briggs, Feng and Wells showed that the columns of
+$H$ and of $H_{-1}$ are maximal sets of their diameter~\cite[Theorem~4 and Corollary~6]{BFW}, and stated the following.
+
+\begin{conjecture*}[{\cite[Conjecture~3]{BFW}}]
+For every $k\ge0$ there is $n_0$ such that whenever $H$ is a normalized Hadamard matrix of order $N\ge n_0$, the
+columns of $H_{-k}$ form a maximal set of their diameter in $Q_{N-k}$.
+\end{conjecture*}
+
+\begin{theorem}\label{thm:cutoff}
+\begin{enumerate}
+\item[(a)] If $H$ is a normalized Hadamard matrix of order $N=2r\ge4$ and $s$ is any row other than the first, the
+columns of $H$ with the first row and row $s$ deleted form a rigid, maximally diameter-$r$ subset of $Q_{N-2}$. In
+particular, taking $s$ to be the second row, the conjecture holds for $k=2$ with $n_0=4$. (Moving any row $s$ to the
+second place keeps $H$ normalized, so an arbitrary $s$ is no more general.)
+\item[(b)] For every $k\ge3$ and every $N=2^m\ge2^k$ there is a normalized Hadamard matrix $H$ of order $N$ such that
+the columns of $H_{-k}$ have diameter $N/2$ and four words of $Q_{N-k}$ outside this set can be adjoined to it
+simultaneously without increasing the diameter. In particular the conjecture fails for every $k\ge3$.
+\end{enumerate}
+\end{theorem}
+
+Part~(a) is proved in Section~\ref{sec:two} by the convexity argument of~\cite[Theorem~4]{BFW}, applied to two groups of
+columns at once. Part~(b) is proved in Section~\ref{sec:switch}; the matrices are Sylvester matrices changed by a
+switching of the kind studied by Orrick~\cite{Orr}.
+
+In the last section of~\cite{BFW} the authors ask whether $f'(n;r)$ is exponential in $r$ for $n$ large; their
+Corollary~13 gives $f'(n;r)\ge\exp(cr^{1/5})$ for an absolute constant $c>0$.
+
+\begin{theorem}\label{thm:dims}
+For $r\ge6$ and $n\ge r+2$, the complex $\VR(Q_n;r)$ has rigid facets of every size $27\cdot2^{r-5}+2j$ with
+$0\le j\le 2^{r-6}$. Consequently $f'(n;r)\ge 2^{r-6}+1$. Moreover $f'(n;r)\le(4-10^{-10})^r$ for all $n$ and all
+$r$ beyond the threshold of~\cite[Theorem~3]{BS}.
+\end{theorem}
+
+The upper bound is a direct consequence of a theorem of Bukh and Saatashvili~\cite{BS}; the lower bound comes from a
+product construction over antipodal pairs of a cube (Section~\ref{sec:dims}). Thus $\log f'(n;r)$ is bounded above and
+below by positive multiples of $r$ for $n\ge r+2$ and $r$ large. The same section of~\cite{BFW} expresses the belief that $s'(n;r)=s(n;r)$ for $n$ large compared to $r$;
+Proposition~\ref{prop:smallest} records that this holds for $n\ge 2^r$.
+
+\section{Two deleted rows}\label{sec:two}
+
+\begin{proof}[Proof of Theorem~\ref{thm:cutoff}(a)]
+Let $R$ be the set of the $N-2$ retained rows, and for a column index $j$ let $c_j\in Q_{N-2}$ be the $j$th column
+restricted to $R$ and $\sigma_j=H_{sj}$. Since the rows of $H$ are orthogonal,
+\[
+\langle c_j,c_l\rangle=N\delta_{jl}-1-\sigma_j\sigma_l .
+\]
+Let $G_\pm=\{j:\sigma_j=\pm1\}$. Row $s$ is orthogonal to the first row, so $|G_+|=|G_-|=r$. Two distinct columns in
+the same group have inner product $-2$, hence distance $r$; columns in different groups have inner product $0$, hence
+distance $r-1$. So the set $C=\{c_j\}$ has diameter $r$, and it is rigid because each group has at least two members.
+For a retained row $i$ we have $\sum_{j\in G_\pm}H_{ij}=\tfrac12\sum_j(1\pm\sigma_j)H_{ij}=0$, by orthogonality of row
+$i$ to the first row and to row $s$. Hence each group sums to the zero vector. Finally
+$\sum_j c_jc_j^{\mathsf T}=NI$, because the retained rows are orthogonal of squared length $N$.
+
+Let $x\in Q_{N-2}$ satisfy $d(x,c_j)\le r$ for all $j$, that is, $a_j=\langle x,c_j\rangle\ge(N-2)-2r=-2$. Since each
+group sums to zero, $\sum_{j\in G_\pm}a_j=0$. Put
+\[
+u=\sum_{j\in G_+}\frac{a_j+2}{N}\,c_j,\qquad v=\sum_{j\in G_-}\frac{a_j+2}{N}\,c_j .
+\]
+The coefficients are nonnegative and add up to $2r/N=1$ in each group, so $u$ and $v$ are convex combinations of
+columns and their coordinates lie in $[-1,1]$. Moreover
+\[
+u+v=\frac1N\sum_j a_jc_j+\frac2N\sum_jc_j=\frac1N\Bigl(\sum_jc_jc_j^{\mathsf T}\Bigr)x=x,
+\]
+and $\langle u,v\rangle=0$ because columns from different groups are orthogonal. In each coordinate $u_i+v_i=x_i=\pm1$
+with $u_i,v_i\in[-1,1]$, which forces $u_iv_i\ge0$. As these products sum to zero, each vanishes: in every coordinate
+one of $u_i,v_i$ is $0$ and the other is $x_i$.
+
+If two distinct columns of $G_+$ have positive weight in $u$, then $|u_i|=1$ only in coordinates where they agree; they
+differ in $r$ coordinates, so $u$ has at most $(N-2)-r=r-2$ nonzero coordinates. The same holds for $v$. If both $u$
+and $v$ had two columns of positive weight, their supports would cover at most $2r-4<N-2$ coordinates, which is
+impossible. Hence one of them, say $u$, is a single column $c_j$. It has full support, so $v=0$ and $x=c_j\in C$. Thus
+$C$ is maximally diameter-$r$.
+\end{proof}
+
+The same argument with one group gives the case $k=1$ of~\cite{BFW}: there $\langle c_j,c_l\rangle=-1$ for $j\ne l$,
+and the coefficients $(1+\langle x,c_j\rangle)/N$ express a compatible $x$ as a convex combination of columns, which
+for a vertex of the cube must be trivial.
+
+\section{Three or more deleted rows}\label{sec:switch}
+
+We first give an exact criterion for when changing a single entry of a truncated column produces a word that can be
+adjoined, and then exhibit Hadamard matrices of every order $2^m\ge8$ in which this happens after three deletions.
+
+\subsection{A one-bit test}
+Let $H$ be a normalized Hadamard matrix of order $N$, let $D$ be a set of $k$ rows containing the first row, and let
+$c_j\in Q_{N-k}$ be the $j$th column restricted to the other rows. If $\delta_D(j,l)$ denotes the number of rows of $D$
+in which columns $j$ and $l$ differ, orthogonality of the rows gives
+\[
+d(c_j,c_l)=\frac N2-\delta_D(j,l)\qquad(j\ne l).
+\]
+For a retained row $t$, let $w$ be $c_j$ with its $t$-entry changed. For $l\ne j$,
+\[
+d(w,c_l)=\frac N2-\delta_D(j,l)+1-2\,[\,H_{tj}\ne H_{tl}\,],
+\]
+and $d(w,c_j)=1$; here and below $[P]$ is $1$ if the statement $P$ holds and $0$ otherwise. Hence:
+
+\begin{lemma}\label{lem:flip}
+$d(w,c_l)\le N/2$ for every $l$ if and only if no other column agrees with column $j$ on all rows of $D\cup\{t\}$.
+If moreover $N/2>k$, then $w$ differs from every $c_l$.
+\end{lemma}
+
+\begin{proof}
+The first claim is read off from the displayed formula. For the second, $d(w,c_l)\ge N/2-(k-1)-1>0$ for $l\ne j$.
+\end{proof}
+
+\subsection{A switched Sylvester matrix}
+Let $m\ge3$ and $N=2^m$. Index rows and columns by $\F^m$, with standard basis $e_1,\dots,e_m$, let
+$U=\{0,e_1,e_2,e_1+e_2\}$ and $E=e_3+U$, and define
+\[
+H(x,y)=(-1)^{\,x\cdot y\;+\;x_1x_2\,[\,y\in E\,]} .
+\]
+Row $0$ and column $0$ consist of ones, since $0\notin E$.
+
+\begin{lemma}\label{lem:hadamard}
+$H$ is a normalized Hadamard matrix.
+\end{lemma}
+
+\begin{proof}
+Let $x\ne z$ and $\chi(y)=(-1)^{(x+z)\cdot y}$. If $x_1x_2=z_1z_2$, the inner product of rows $x$ and $z$ is
+$\sum_y\chi(y)=0$. Otherwise it equals $\sum_y\chi(y)-2\sum_{y\in E}\chi(y)=-2\chi(e_3)\sum_{u\in U}\chi(u)$. Since
+$x_1x_2\ne z_1z_2$, the vectors $x$ and $z$ differ in the first or second coordinate, so $\chi$ is a nontrivial
+character on $U$ and the last sum vanishes.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:cutoff}(b)]
+Order the rows so that the first three are $0,e_1,e_2$, followed by $k-3$ further rows other than $t=e_1+e_2$; this
+keeps $H$ normalized. Let $D$ be the set of these $k$ rows. Rows $e_1$ and $e_2$ are not switched, while $t_1t_2=1$, so
+\[
+H(t,y)=\begin{cases}H(e_1,y)\,H(e_2,y), & y\notin E,\\ -H(e_1,y)\,H(e_2,y), & y\in E.\end{cases}
+\]
+As $y$ runs over $E$, the pair $(y_1,y_2)$ takes each of its four values once, so the four columns in $E$ have four
+distinct sign patterns on $(e_1,e_2,t)$, and no column outside $E$ shares any of them. A fortiori each column in $E$ is
+the only column with its pattern on $D\cup\{t\}$. Let $w_y$, $y\in E$, be $c_y$ with its $t$-entry changed. Since
+$N=2^m\ge2^k$ and $k\ge3$, we have $N/2>k$, so by Lemma~\ref{lem:flip} each $w_y$ lies outside $C=\{c_j\}$ and within
+distance $N/2$ of every column. Two of the new words differ exactly where the corresponding columns do, so their
+distance is at most $N/2$, and they are distinct because distinct columns have distance at least $N/2-(k-1)>0$.
+Finally, $N>2^{k-1}$, so two columns agree on the $k-1$ nonconstant rows of $D$, and $\diam C=N/2$. The set
+$C\cup\{w_y:y\in E\}$ therefore has the same diameter as $C$.
+\end{proof}
+
+\begin{remark}
+For any three distinct nonconstant rows $a,b,t$ of a normalized Hadamard matrix of order $N$, expanding
+$\frac18(1+s_1H_{aj})(1+s_2H_{bj})(1+s_3H_{tj})$ and summing over $j$ gives the number of columns with the sign pattern
+$(s_1,s_2,s_3)$ on the rows $a,b,t$:
+\[
+\#\{j: (H_{aj},H_{bj},H_{tj})=(s_1,s_2,s_3)\}=\frac{N+s_1s_2s_3\,T}{8},\qquad T=\sum_jH_{aj}H_{bj}H_{tj},
+\]
+since the linear and quadratic sums vanish by normalization and orthogonality. For $N>8$ some pattern on $(a,b,t)$
+occurs exactly once if and only if $|T|=N-8$, that is, if and only if the row $t$ agrees with $H_aH_b$ or with $-H_aH_b$
+(coordinatewise products) in all but four positions. With $D$ the first row together with $a$ and $b$, each such row
+$t$ gives, through Lemma~\ref{lem:flip}, four words that can be adjoined to the columns of $H$ with rows $D$ deleted.
+\end{remark}
+
+\section{Rigid facets in exponentially many dimensions}\label{sec:dims}
+
+Identify $x\in Q_7$ with the integer $\sum_{i=1}^7[x_i=-1]\,2^{i-1}\in\{0,\dots,127\}$, so that $d(x,y)$ is the number
+of ones in the binary expansion of the bitwise exclusive or of the two integers, and let
+\begin{align*}
+A=\{&6,16,25,39,41,43,56,62,63,74,75,76,78,83,91,93,95,99,101,104,\\
+&106,112,114,119,122,124,126\},\\
+B=\{&16,24,37,38,41,42,45,46,55,56,62,68,75,77,78,92,95,98,100,105,\\
+&106,108,112,115,120,124,125,126\}.
+\end{align*}
+
+\begin{lemma}\label{lem:AB}
+The sets $A$ ($27$ words) and $B$ ($28$ words) are rigid and maximally diameter-$5$ in $Q_7$, and
+$d(a,b)\le6$ for all $a\in A$, $b\in B$.
+\end{lemma}
+
+\begin{proof}
+This is a finite check. For $S\in\{A,B\}$ and each of the $128$ words $x$ put $M_S(x)=\max_{y\in S}d(x,y)$. Then
+$M_S(x)=5$ for every $x\in S$ (diameter $5$ and rigidity) and $M_S(x)\ge6$ for every $x\notin S$ (maximality). The
+cross bound is checked on the $27\cdot28$ pairs.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:dims}]
+Let $L=r-5\ge1$. The cube $Q_L$ splits into $2^{L-1}$ antipodal pairs $\{p,-p\}$. Choose for each pair a set
+$S_p=S_{-p}\in\{A,B\}$ and let
+\[
+X=\{(p,w): p\in Q_L,\ w\in S_p\}\subseteq Q_{L+7}.
+\]
+Two points over antipodal bases are at distance $L+d(w,w')\le L+5$, because they share the same fibre set. Two points
+over non-antipodal bases are at distance at most $(L-1)+6$ by Lemma~\ref{lem:AB}. So $\diam X\le L+5=r$. Each
+$(p,w)\in X$ has the partner $(-p,w')$ with $d(w,w')=5$, by rigidity of $S_p$; so $X$ is rigid of diameter $r$. If
+$(p,z)\notin X$, then $z\notin S_p$, and maximality of $S_p$ gives $w\in S_p=S_{-p}$ with $d(z,w)\ge6$, so
+$d((p,z),(-p,w))\ge L+6>r$. Thus $X$ is a rigid facet of $\VR(Q_{r+2};r)$. If $j$ of the pairs carry $B$, then
+$|X|=27\cdot2^L+2j$, and $j$ ranges over $0,\dots,2^{L-1}$. By~\cite[Corollary~6]{BFW} the sets
+$X\times\{\one_{n-r-2}\}$ are rigid facets of $\VR(Q_n;r)$ for every $n\ge r+2$. Facets of different sizes have
+different dimensions, which gives the lower bound.
+
+For the upper bound let $X$ be a rigid facet of $\VR(Q_n;r)$, and view $Q_n$ inside $\{\pm1\}^{\mathbb N}$ by appending
+the constant suffix $\one$. The set $X\times\{\one\}$ has diameter $r$ and is maximal there: a word differing from the
+suffix in infinitely many places is at infinite distance from $X\times\{\one\}$, and a word differing in finitely many
+places lies in some $Q_{n+m}$, where $X\times\{\one_m\}$ is maximal by~\cite[Corollary~6]{BFW}. (This correspondence
+between sets stable under lifting and finite maximal sets in the infinite cube is noted in the introduction
+of~\cite{BS}, with reference to~\cite{BFW}.)
+Being finite, it contains no
+Hamming ball of radius one. By~\cite[Theorem~3]{BS} its size is at most $(4-10^{-10})^r$ once $r$ is large. Since the
+number of dimensions of rigid facets is at most the largest size of one, the upper bound follows.
+\end{proof}
+
+For comparison, \cite[Conjecture~1]{BFW} asserts that every rigid facet of $\VR(Q_n;r)$ has at most $2^r$ elements, which would
+give $f'(n;r)\le2^r$.
+
+\begin{proposition}\label{prop:smallest}
+$s(n;r)=s'(n;r)$ whenever $r\ge1$ and $n\ge2^r$. If a Hadamard matrix of order $2r$ exists, this holds for $n\ge 2r$.
+\end{proposition}
+
+\begin{proof}
+Let $X$ be a facet that is not rigid. Some $z\in X$ has $d(z,y)\le r-1$ for all $y\in X$, so every word at distance at
+most one from $z$ is within distance $r$ of all of $X$ and belongs to $X$ by maximality. Hence $|X|\ge n+1$. On the
+other hand the subcube $Q_r\times\{\one_{n-r}\}$ is a rigid facet with $2^r$ elements, and when a Hadamard matrix of order
+$2r$ exists, \cite[Theorem~4 and Corollary~6]{BFW} give a rigid facet with $2r$ elements for all $n\ge2r-1$. In either
+range of $n$, a smallest facet is therefore rigid.
+\end{proof}
+
+Proposition~\ref{prop:smallest} says nothing about the common value; for it, see~\cite[Conjecture~2]{BFW} and the lower
+bound $|X|\ge\frac12\bigl(r/\log(2r)\bigr)^{2/3}$ of~\cite[Theorem~6]{BS} for finite maximal sets in the infinite cube.
+
+\section*{Acknowledgements and funding}
+This work was done by AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math Brain~\cite{MathBrainRepo}
+and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent memory in which the agents
+record claims, proofs, failed attempts and methods, retrieve one another's results, coordinate who works on what, and
+audit each other's work. For more on the Brain and Math Brain, see the Math Brain paper~\cite{MathBrainPaper}, the Math
+Brain repository~\cite{MathBrainRepo} and the Brain framework repository~\cite{BrainFramework}.
+
+The research presented in this paper was supported by the European Research Council (ERC) under the European Union's
+Horizon Europe research and innovation programme (grant agreement No.~101041711), by the Simons Foundation as part of
+the Collaboration on the Mathematical and Scientific Foundations of Deep Learning, by Heights Labs, by Convex Nexus
+Capital, by the Israel Science Foundation (grant number 2258/19), and by the Israel Science Foundation (ISF Grant
+4101/25).
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital.
+These entities are included in the funding declaration above.
+
+\section*{Data availability}
+No data were generated or analysed in this work. The finite checks in Lemma~\ref{lem:AB} use only the two lists printed
+there.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+This paper is part of a research project on AI proving problems. Codex agents (OpenAI) produced the constructions and
+proofs, and Claude agents (Anthropic) checked the proofs and the references and wrote the manuscript. The questions are
+due to Briggs, Feng and Wells~\cite{BFW}. The author directed the work and is responsible for the content of the paper
+and for decisions concerning its dissemination.
+
+\begin{thebibliography}{9}
+\bibitem{BFW} J.~Briggs, Z.~Feng and C.~Wells, \emph{Facets in the Vietoris--Rips complexes of hypercubes},
+Exp. Math. \textbf{35} (2026), no.~2, 388--396, \href{https://doi.org/10.1080/10586458.2025.2474034}{doi:10.1080/10586458.2025.2474034};
+\arxiv{2408.01288}. Numbered results are cited as in arXiv version~2.
+\bibitem{BS} B.~Bukh and A.~Saatashvili, \emph{Maximal sets of a given diameter in Hamming cubes}, preprint, 2025,
+\arxiv{2507.10828}.
+\bibitem{Orr} W.~P.~Orrick, \emph{Switching operations for Hadamard matrices}, preprint, 2005, \arxiv{math/0507515}.
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
+\url{https://github.com/yspennstate/math-brain-public/tree/5427734deee9be643d6dfbdd5e7d4baeeefe4a4a}.
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical
+research}, 2026, \url{https://doi.org/10.5281/zenodo.24150837}.
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026,
+\url{https://github.com/yspennstate/brain-framework-public/tree/46b935d26d5a2893f7790b60466387dd8da47ef5}.
+\end{thebibliography}
+
+\end{document}
